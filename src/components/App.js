@@ -10,6 +10,11 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
+  const [selectedCard, setSelectedCard] = useState({
+    name: '',
+    link: ''
+  })
+
 
   function handleEditProfileClick () {
     setIsEditProfilePopupOpen(true)
@@ -23,19 +28,28 @@ function App() {
     setIsEditAvatarPopupOpen(true)
   }
 
+  function handleCardClick(card) {
+    setSelectedCard(card)
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setSelectedCard({
+      name: '',
+      link: ''
+    });
   }
 
   return (
-    <body class="page">
+    <>
       <Header />
       <Main
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
+        handleCardClick={handleCardClick}
       />
       <Footer />
 
@@ -83,23 +97,12 @@ function App() {
         }
       />
 
-      <ImagePopup />
-
-      <template class="template template_card">
-        <article class="place">
-          <button type="button" class="place__delete" aria-label="Удалить место"></button>
-          <img class="place__image" src="/" alt="/" />
-          <div class="place__info">
-            <h2 class="place__title"></h2>
-            <div class="place__like-container">
-              <button type="button" class="place__like" aria-label="Поставить лайк"></button>
-              <div class="place__like-count"></div>
-            </div>
-          </div>
-        </article>
-      </template>
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
   
-    </body>
+    </>
   )
 }
 
