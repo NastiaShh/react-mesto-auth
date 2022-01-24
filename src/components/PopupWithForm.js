@@ -13,7 +13,7 @@ function PopupWithForm(props) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default PopupWithForm;
+export default PopupWithForm

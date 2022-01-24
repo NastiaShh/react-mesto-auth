@@ -12,4 +12,4 @@ function ImagePopup() {
   );
 }
 
-export default ImagePopup;
+export default ImagePopup

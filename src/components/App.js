@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Header from './Header.js';
-import Main from './Main.js';
-import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js';
-import ImagePopup from './ImagePopup.js';
-import '../index.css';
+import { useState } from 'react'
+import Header from './Header.js'
+import Main from './Main.js'
+import Footer from './Footer.js'
+import PopupWithForm from './PopupWithForm.js'
+import ImagePopup from './ImagePopup.js'
+import '../index.css'
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -16,17 +16,17 @@ function App() {
   }
 
   function handleAddPlaceClick () {
-    setIsAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true)
   }
 
   function handleEditAvatarClick () {
-    setIsEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true)
   }
 
   function closeAllPopups() {
-    setIsEditProfilePopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false)
+    setIsAddPlacePopupOpen(false)
+    setIsEditAvatarPopupOpen(false)
   }
 
   return (
@@ -100,7 +100,7 @@ function App() {
       </template>
   
     </body>
-  );
+  )
 }
 
-export default App;
+export default App
