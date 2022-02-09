@@ -43,7 +43,7 @@ class Api {
     .then(this._checkResponseStatus);
   }
 
-  setUserAvatar({avatar}) {
+  setUserAvatar(avatar) {
     return fetch(`${this._address}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
@@ -71,26 +71,15 @@ class Api {
     .then(this._checkResponseStatus);
   }
 
-  setLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._address}/cards/${cardId}/likes`, {
-      method: 'PUT',
+      method: `${isLiked ? 'DELETE' : 'PUT'}`,
       headers: {
         authorization: this._token,
         'Content-Type': 'application/json',
-      }, 
+      },
     })
-    .then(this._checkResponseStatus);
-  }
-
-  removeLike(cardId) {
-    return fetch(`${this._address}/cards/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json',
-      }, 
-    })
-    .then(this._checkResponseStatus);
+    .then(this._checkResponseStatus)
   }
 
   deleteCard(cardId) {
