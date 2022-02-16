@@ -10,6 +10,7 @@ import AddPlacePopup from './AddPlacePopup.js'
 import ImagePopup from './ImagePopup.js'
 import Login from './Login.js'
 import Register from './Register.js'
+// import ProtectedRoute from './ProtectedRoute.js'
 import CurrentUserContext from './../contexts/CurrentUserContext'
 import '../index.css'
 
