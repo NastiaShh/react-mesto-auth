@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import api from '../utils/Api.js'
 import Header from './Header.js'
 import Main from './Main.js'
@@ -7,6 +8,8 @@ import EditProfilePopup from './EditProfilePopup.js'
 import EditAvatarPopup from './EditAvatarPopup.js'
 import AddPlacePopup from './AddPlacePopup.js'
 import ImagePopup from './ImagePopup.js'
+import Login from './Login.js'
+import Register from './Register.js'
 import CurrentUserContext from './../contexts/CurrentUserContext'
 import '../index.css'
 
@@ -131,6 +134,17 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/sign-up">
+              <Register />
+            </Route>
+            <Route path="/sign-in">
+              <Login />
+            </Route>
+            {/* <ProtectedRoute /> */}
+          </Switch>
+        </BrowserRouter>
         <Main
           onEditProfile={handleEditProfileClick}
           onEditAvatar={handleEditAvatarClick}
