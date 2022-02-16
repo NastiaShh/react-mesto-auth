@@ -55,3 +55,6 @@
 @import url(./blocks/register/__button/register__button.css);
 @import url(./blocks/register/__login-sign/register__login-sign.css);
 @import url(./blocks/register/__login-link/register__login-link.css);
+@import url(./blocks/popup/__content/_register-tooltip/popup__content_register-tooltip.css);
+@import url(./blocks/popup/__register-tooltip-img/popup__register-tooltip-img.css);
+@import url(./blocks/popup/__title/_register-tooltip/popup__title_register-tooltip.css);

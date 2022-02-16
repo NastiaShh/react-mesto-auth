@@ -11,6 +11,7 @@ import ImagePopup from './ImagePopup.js'
 import Login from './Login.js'
 import Register from './Register.js'
 // import ProtectedRoute from './ProtectedRoute.js'
+import InfoTooltip from './InfoTooltip.js'
 import CurrentUserContext from './../contexts/CurrentUserContext'
 import '../index.css'
 
@@ -28,6 +29,8 @@ function App() {
     avatar: ''
   })
   const [cards, setCards] = useState([])
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false)
+  // const [isSuccess, setIsSuccess] = useState(false)
   
   useEffect(() => {
     api.getUserInfo()
@@ -125,6 +128,7 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setIsInfoToolTipOpen(false)
     setSelectedCard({
       name: '',
       link: ''
@@ -165,6 +169,8 @@ function App() {
           card={selectedCard}
           onClose={closeAllPopups}
         />
+
+        <InfoTooltip isOpen={isInfoToolTipOpen} onClose={closeAllPopups} isSuccess={isSuccess} />
 
       </CurrentUserContext.Provider>
     </>
