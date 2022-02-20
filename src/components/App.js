@@ -32,6 +32,7 @@ function App() {
   const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
+  const [userEmail, setUserEmail] = useState('')
   
   useEffect(() => {
     api.getUserInfo()
@@ -139,7 +140,10 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header
+          email={userEmail}
+          onSignOut={handleSignOut}
+        />
         <BrowserRouter>
           <Switch>
             <Route path="/sign-up">
