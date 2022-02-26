@@ -136,7 +136,7 @@ function App() {
     setSelectedCard({
       name: '',
       link: ''
-    });
+    })
   }
 
   function handleRegister(password, email) {
@@ -144,7 +144,6 @@ function App() {
       .then(() => {
         setIsSuccess(true)
         handleLogin(password, email)
-        history.push('/sign-in')
       })
       .catch((err) => {
         setIsSuccess(false)
