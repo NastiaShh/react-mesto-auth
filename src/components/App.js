@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import api from '../utils/Api.js'
+import * as auth from '../utils/Auth.js'
 import Header from './Header.js'
 import Main from './Main.js'
 import Footer from './Footer.js'
@@ -33,6 +34,7 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
   const [userEmail, setUserEmail] = useState('')
+  const history = useHistory()
   
   useEffect(() => {
     api.getUserInfo()
@@ -137,6 +139,62 @@ function App() {
     });
   }
 
+  function handleRegister(password, email) {
+    auth.register(password, email)
+      .then(() => {
+        setIsSuccess(true)
+        handleLogin(password, email)
+        history.push('/sign-in')
+      })
+      .catch((err) => {
+        setIsSuccess(false)
+        console.log(err)
+      })
+      .finally(() => {
+        setIsInfoToolTipOpen(true);
+      })
+  }
+
+  function handleLogin(password, email) {
+    auth.authorize(password, email)
+      .then(data => {
+        if (data.token) {
+          setLoggedIn(true)
+          localStorage.setItem('jwt', data.token)
+          setUserEmail(email)
+          history.push('/')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  function handleSignOut(){
+    localStorage.removeItem('jwt')
+    setLoggedIn(false)
+    setUserEmail('')
+    history.push('/sign-in')
+  }
+
+  function handleTokenCheck() {
+    if (localStorage.getItem('jwt')) {
+      const token = localStorage.getItem('jwt')
+      auth.checkToken(token)
+        .then(res => {
+          if (res) {
+            setLoggedIn(true)
+            setUserEmail(res.data.email)
+            history.push('/');
+          }
+        })
+    }
+  }
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, [])
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -144,32 +202,30 @@ function App() {
           email={userEmail}
           onSignOut={handleSignOut}
         />
-        <BrowserRouter>
-          <Switch>
-            <Route path="/sign-up">
-              <Register />
-            </Route>
-            <Route path="/sign-in">
-              <Login />
-            </Route>
-            <ProtectedRoute
-              exact path="/"
-              component={Main}
-              loggedIn={loggedIn}
-              onEditProfile={handleEditProfileClick}
-              onEditAvatar={handleEditAvatarClick}
-              onAddPlace={handleAddPlaceClick}
-              cards={cards}
-              handleCardClick={handleCardClick}
-              handleCardLike={handleCardLike}
-              handleCardDelete={handleCardDelete}
-            />
-            <ProtectedRoute
-              component={Footer}
-              loggedIn={loggedIn}
-            />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <ProtectedRoute
+            exact path="/"
+            component={Main}
+            loggedIn={loggedIn}
+            onEditProfile={handleEditProfileClick}
+            onEditAvatar={handleEditAvatarClick}
+            onAddPlace={handleAddPlaceClick}
+            cards={cards}
+            handleCardClick={handleCardClick}
+            handleCardLike={handleCardLike}
+            handleCardDelete={handleCardDelete}
+          />
+          <Route path="/sign-up">
+            <Register handleRegister={handleRegister} />
+          </Route>
+          <Route path="/sign-in">
+            <Login handleLogin={handleLogin} />
+          </Route>
+        </Switch>
+        <ProtectedRoute
+          component={Footer}
+          loggedIn={loggedIn}
+        />
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />

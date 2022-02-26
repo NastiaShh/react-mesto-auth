@@ -59,3 +59,37 @@
 @import url(./blocks/popup/__content/_register-tooltip/popup__content_register-tooltip.css);
 @import url(./blocks/popup/__register-tooltip-img/popup__register-tooltip-img.css);
 @import url(./blocks/popup/__title/_register-tooltip/popup__title_register-tooltip.css);
+
+.header__authorized {
+  display: flex;
+  height: 68px;
+}
+
+@media screen and (max-width: 580px) {
+  .header__authorized {
+    flex-direction: column;
+  }
+}
+
+.header__email {
+  color: white;
+  margin: 0 24px 0 0;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.header__logout-button {
+  padding: 0;
+  height: 18px;
+  border: none;
+  background-color: transparent;
+  color: #A9A9A9;
+  font-size: 18px;
+  line-height: 22px;
+  transition: opacity 0.5s ease-in;
+}
+
+.header__logout-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
