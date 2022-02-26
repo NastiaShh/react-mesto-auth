@@ -143,14 +143,13 @@ function App() {
     auth.register(password, email)
       .then(() => {
         setIsSuccess(true)
+        setIsInfoToolTipOpen(true)
         handleLogin(password, email)
       })
       .catch((err) => {
         setIsSuccess(false)
-        console.log(err)
-      })
-      .finally(() => {
         setIsInfoToolTipOpen(true)
+        console.log(err)
       })
   }
 
