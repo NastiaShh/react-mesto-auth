@@ -221,10 +221,8 @@ function App() {
             <Login handleLogin={handleLogin} />
           </Route>
         </Switch>
-        <ProtectedRoute
-          component={Footer}
-          loggedIn={loggedIn}
-        />
+
+        <Footer />
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
