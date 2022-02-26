@@ -150,7 +150,7 @@ function App() {
         console.log(err)
       })
       .finally(() => {
-        setIsInfoToolTipOpen(true);
+        setIsInfoToolTipOpen(true)
       })
   }
 
@@ -165,6 +165,8 @@ function App() {
         }
       })
       .catch((err) => {
+        setIsSuccess(false)
+        setIsInfoToolTipOpen(true)
         console.log(err)
       })
   }
@@ -184,7 +186,7 @@ function App() {
           if (res) {
             setLoggedIn(true)
             setUserEmail(res.data.email)
-            history.push('/');
+            history.push('/')
           }
         })
     }
